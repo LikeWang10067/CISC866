@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage{graphicx, listings, xcolor, subcaption}
+\usepackage{graphicx, listings, xcolor, subcaption, hyperref}
 \usepackage[letterpaper,top=1cm,bottom=2cm,left=1cm,right=1cm,marginparwidth=1cm]{geometry}
 
 \lstset{
@@ -48,7 +48,7 @@ Picture look like this:
         \caption{Encrypted pic original2.bmp}
     \end{subfigure}
     \caption{ECB Mode Encrypted Images}
-\end{figure}\\
+\end{figure}
 \textbf{Encryption command for CBC mode}:
 \begin{lstlisting}[language=Python]
 $ openssl enc -aes-128-cbc -e -in pic_original1.bmp -out pic_1_cbc_enc.bmp -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
@@ -68,8 +68,20 @@ Picture look like this:
         \caption{Encrypted pic original2.bmp}
     \end{subfigure}
     \caption{CBC Mode Encrypted Images}
-\end{figure}\\
+\end{figure}
 \subsection{Explain my observations}
-From the two pictures above, we can see that the ECB mode encrypted image still retains some recognizable patterns from the original image, while the CBC mode encrypted image appears more random and does not reveal any discernible patterns. This is because ECB mode encrypts identical plaintext blocks into identical ciphertext blocks, making it vulnerable to pattern analysis. In contrast, CBC mode uses an initialization vector (IV) and chains the encryption of each block to the previous one, which helps to obscure patterns in the plaintext.
+\begin{itemize}
+  \item \textbf{ECB mode} is kind of like a invalid encryption for images, because it reveals patterns in the original image. Even though the colors are changed, the shapes and outlines of objects in the image are still visible.
+  \item \textbf{CBC mode} is a much better encryption method, at least from the encrypted cbc images, I can't really tell what the original image looks like.
+\end{itemize}
+Digging on the reason why, I found that: ECB is weak encryption for images because it's encrypted block wise, meaning that identical plaintext blocks are encrypted into identical ciphertext blocks, while CBC mode uses an initialization vector (IV) and chains the encryption of each block to the previous one, which helps to obscure patterns in the original image.\\
+Check the following references for detailed information:\\
+\url{https://pycryptodome.readthedocs.io/en/latest/src/cipher/classic.html#ecb-mode}\\
+\url{https://pycryptodome.readthedocs.io/en/latest/src/cipher/classic.html#cbc-mode}\\
+\url{https://www.highgo.ca/2019/08/08/the-difference-in-five-modes-in-the-aes-encryption-algorithm/}
+
+\subsection{Describe the visual differences}
+For me, the original image looks very simmilar, but, to me, I first noticed that original1.bmp has a bigger file size, then, I tried to zoom both picture, and noticed that original1.bmp has a vector background, meaning that when I zoom in, the background is still clear.\\
+Therefore, after the encryption, encrypted1.bmp still shows grid-like patterns in the background, while encrypted2.bmp has a more uniform background.
 
 \end{document}
