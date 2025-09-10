@@ -29,16 +29,18 @@
     $ tail -c +55 encrypted1.bmp > body
     $ cat header body > new1.bmp
 \end{lstlisting}
-Encryption command for ECB mode (Note: iv not used by this cipher):
+\textbf{Encryption command for ECB mode} (Note: iv not used by this cipher):
 \begin{lstlisting}[language=Python]
 $ openssl enc -aes-128-ecb -e -in pic_original1.bmp -out pic_1_ecb_enc.bmp -K 00112233445566778889aabbccddeeff
 \end{lstlisting}
 Picture look like this:\\
 \includegraphics[height=5cm]{images/pic_1_ecb.png}
 
-Encryption command for CBC mode:
+\textbf{Encryption command for CBC mode}:
 \begin{lstlisting}[language=Python]
 $ openssl enc -aes-128-cbc -e -in pic_original1.bmp -out pic_1_cbc_enc.bmp -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
 \end{lstlisting}
+Picture look like this:\\
+\includegraphics[height=5cm]{images/pic_1_cbc.png}
 
 \end{document}
