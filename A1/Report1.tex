@@ -43,4 +43,7 @@ $ openssl enc -aes-128-cbc -e -in pic_original1.bmp -out pic_1_cbc_enc.bmp -K 00
 Picture look like this:\\
 \includegraphics[height=5cm]{images/pic_1_cbc.png}
 
+\subsection{Explain my observations}
+From the two pictures above, we can see that the ECB mode encrypted image still retains some recognizable patterns from the original image, while the CBC mode encrypted image appears more random and does not reveal any discernible patterns. This is because ECB mode encrypts identical plaintext blocks into identical ciphertext blocks, making it vulnerable to pattern analysis. In contrast, CBC mode uses an initialization vector (IV) and chains the encryption of each block to the previous one, which helps to obscure patterns in the plaintext.
+
 \end{document}
