@@ -132,7 +132,7 @@ f3.txt & 15 & 16 \\
 \hline
 \end{tabular}
 \caption{File Size Comparison}
-\end{table}
+\end{table}\\
 From the table above, we can see that no matter how many bytes the original file has (as long as it's less than 16 bytes),
 the encrypted file size is always 16 bytes. This is because AES is a block cipher that operates on fixed-size blocks of 16 bytes.
 When the plaintext is shorter than the block size, padding is added to make it a full block of 16 bytes.
