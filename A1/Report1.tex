@@ -128,13 +128,37 @@ f1.txt & 5 & 16 \\
 \hline
 f2.txt & 10 & 16 \\
 \hline
-f3.txt & 15 & 16 \\
+f3.txt & 16 & 32 \\
 \hline
 \end{tabular}
 \caption{File Size Comparison}
 \end{table}\\
 From the table above, we can see that no matter how many bytes the original file has (as long as it's less than 16 bytes),
 the encrypted file size is always 16 bytes. This is because AES is a block cipher that operates on fixed-size blocks of 16 bytes.
-When the plaintext is shorter than the block size, padding is added to make it a full block of 16 bytes.
+When the plaintext is shorter than the block size, padding is added to make it a full block of 16 bytes. However, if the original
+file size is exactly 16 bytes, an additional block of padding is added, resulting in an encrypted file size of 32 bytes.
+\subsection{Decryption of The CBC Encrypted Files}
+I used the following command to decrypt the files:
+\begin{lstlisting}[language=Python]
+$ openssl enc -aes-128-cbc -d -nopad -in f1_enc.txt -out f1_dec.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+$ openssl enc -aes-128-cbc -d -nopad -in f2_enc.txt -out f2_dec.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+$ openssl enc -aes-128-cbc -d -nopad -in f3_enc.txt -out f3_dec.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+\end{lstlisting}
+Let's run \texttt{hexdump} on the decrypted file:
+\begin{lstlisting}[language=Python]
+$ hexdump -C f1_dec.txt
+00000000  31 32 33 34 35 0b 0b 0b  0b 0b 0b 0b 0b 0b 0b 0b  |12345...........|
+00000010
+$ hexdump -C f2_dec.txt
+00000000  31 32 33 34 35 36 37 38  39 30 06 06 06 06 06 06  |1234567890......|
+00000010
+$ hexdump -C f3_dec.txt
+00000000  31 32 33 34 35 36 37 38  39 30 61 73 64 66 67 61  |1234567890asdfga|
+00000010  10 10 10 10 10 10 10 10  10 10 10 10 10 10 10 10  |................|
+00000020
+\end{lstlisting}
+We can see that the decrypted files contain padding bytes (\texttt{0x0b, 0x06, 0x10}) at the end of the original data.
+\texttt{0x0b} means there are 11 bytes of padding, \texttt{0x06} means there are 6 bytes of padding,
+and \texttt{0x10} means there are 16 bytes of padding.
 
 \end{document}
