@@ -104,6 +104,37 @@ Professor mentioned in the lecture: "In CTR modes, we will generate a keystream 
 I was thinking, that could be the reason why CFB, OFB, and CTR modes do not require padding. I confirmed my guess by
 the following references:\\
 \url{https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation}\\
-
+\subsection{File Size Comparison after Encrypted with CBC}
+I used the following command to create a file:
+\begin{lstlisting}[language=Python]
+$ echo -n "12345" > f1.txt
+$ echo -n "1234567890" > f2.txt
+$ echo -n "1234567890asdfga" > f3.txt
+\end{lstlisting}
+Then I encrypted them using CBC mode:
+\begin{lstlisting}[language=Python]
+$ openssl enc -aes-128-cbc -e -in f1.txt -out f1_enc.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+$ openssl enc -aes-128-cbc -e -in f2.txt -out f2_enc.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+$ openssl enc -aes-128-cbc -e -in f3.txt -out f3_enc.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+\end{lstlisting}
+The file size comparison is shown below:
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{File} & \textbf{Original Size (bytes)} & \textbf{Encrypted Size (bytes)} \\
+\hline
+f1.txt & 5 & 16 \\
+\hline
+f2.txt & 10 & 16 \\
+\hline
+f3.txt & 15 & 16 \\
+\hline
+\end{tabular}
+\caption{File Size Comparison}
+\end{table}
+From the table above, we can see that no matter how many bytes the original file has (as long as it's less than 16 bytes),
+the encrypted file size is always 16 bytes. This is because AES is a block cipher that operates on fixed-size blocks of 16 bytes.
+When the plaintext is shorter than the block size, padding is added to make it a full block of 16 bytes.
 
 \end{document}
