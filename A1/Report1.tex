@@ -161,4 +161,36 @@ We can see that the decrypted files contain padding bytes (\texttt{0x0b, 0x06, 0
 \texttt{0x0b} means there are 11 bytes of padding, \texttt{0x06} means there are 6 bytes of padding,
 and \texttt{0x10} means there are 16 bytes of padding.
 
+\subsection{Experiments with 256-bit AES}
+Let's first try a file with size of 7 and 16 bytes:
+\begin{lstlisting}[language=Python]
+$ echo -n "1234567" > aes_256_1.txt
+$ openssl enc -aes-256-cbc -e -in aes_256_1.txt -out aes_256_1_enc.txt -K 00112233445566778889aabbccddeeff00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+$ openssl enc -aes-256-cbc -d -nopad -in aes_256_1_enc.txt -out aes_256_1_dec.txt -K 00112233445566778889aabbccddeeff00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+$ hexdump -C aes_256_1_dec.txt
+00000000  31 32 33 34 35 36 37 09  09 09 09 09 09 09 09 09  |1234567.........|
+00000010
+$ echo -n "1234567890abcdef" > aes_256_2.txt
+$ openssl enc -aes-256-cbc -e -in aes_256_2.txt -out aes_256_2_enc.txt -K 00112233445566778889aabbccddeeff00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+$ openssl enc -aes-256-cbc -d -nopad -in aes_256_2_enc.txt -out aes_256_2_dec.txt -K 00112233445566778889aabbccddeeff00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+$ hexdump -C aes_256_2_dec.txt
+00000000  31 32 33 34 35 36 37 38  39 30 61 62 63 64 65 66  |1234567890abcdef|
+00000010  10 10 10 10 10 10 10 10  10 10 10 10 10 10 10 10  |................|
+00000020
+\end{lstlisting}
+The original file size is 16 bytes, the encrypted file size is 32 bytes (which is expected)\\
+Now let's try a file with size of 47 bytes:
+\begin{lstlisting}[language=Python]
+$ echo -n "This is a test file for 256-bit AES encryption." > aes_256_3.txt
+$ openssl enc -aes-256-cbc -e -in aes_256_3.txt -out aes_256_3_enc.txt -K 00112233445566778889aabbccddeeff00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+$ openssl enc -aes-256-cbc -d -nopad -in aes_256_3_enc.txt -out aes_256_3_dec.txt -K 00112233445566778889aabbccddeeff00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+$ hexdump -C aes_256_3_dec.txt
+00000000  54 68 69 73 20 69 73 20  61 20 74 65 73 74 20 66  |This is a test f|
+00000010  69 6c 65 20 66 6f 72 20  32 35 36 2d 62 69 74 20  |ile for 256-bit |
+00000020  41 45 53 20 65 6e 63 72  79 70 74 69 6f 6e 2e 01  |AES encryption..|
+00000030
+\end{lstlisting}
+The original file size is 47 bytes, the encrypted file size is 48 (which is 32+16) bytes, which behaves exactly like 128-bit AES's padding mechanism. \\
+
+
 \end{document}
