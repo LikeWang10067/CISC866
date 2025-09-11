@@ -25,9 +25,9 @@
 
 \textit{Note: I chose to use the following method to get rid of the header issue:}
 \begin{lstlisting}[language=Python]
-    $ head -c 54 original1.bmp > header
-    $ tail -c +55 encrypted1.bmp > body
-    $ cat header body > new1.bmp
+$ head -c 54 original1.bmp > header
+$ tail -c +55 encrypted1.bmp > body
+$ cat header body > new1.bmp
 \end{lstlisting}
 \textbf{Encryption command for ECB mode} (Note: iv not used by this cipher):
 \begin{lstlisting}[language=Python]
@@ -81,7 +81,29 @@ Check the following references for detailed information:\\
 \url{https://www.highgo.ca/2019/08/08/the-difference-in-five-modes-in-the-aes-encryption-algorithm/}
 
 \subsection{Describe the visual differences}
-For me, the original image looks very simmilar, but, to me, I first noticed that original1.bmp has a bigger file size, then, I tried to zoom both picture, and noticed that original1.bmp has a vector background, meaning that when I zoom in, the background is still clear.\\
-Therefore, after the encryption, encrypted1.bmp still shows grid-like patterns in the background, while encrypted2.bmp has a more uniform background.
+The original image looks very simmilar, but to me, I first noticed that original1.bmp (1.5 MB) has a bigger file size
+than original2.bmp (1.1 MB), then, I tried to zoom both picture, and noticed that original1.bmp has a vector background,
+meaning that when I zoom in, the background is still clear.\\
+Therefore, the color encoding mechanism (for each pixel) of these 2 images might be different. The second image:
+original2.bmp might used RGB color encoding, while original1.bmp might used some other color encoding mechanism.
+And note that since AES (CBC and ECB) are block ciphers, meaning that they encrypt fixed size blocks of 128 bits,
+so, if we are using RGB color encoding, each pixel is represented by 24 bits, so, each block can only contain
+5 pixels (5*24=120 bits) and the remaining 8 bits are carried to the next block. After a certain number of blocks,
+the reminder bits will accumulate to 24 bits, and form a new pixel. And that's why we see partern like the image
+shown below.\\
+\begin{figure}[h]
+    \centering
+    \includegraphics[height=3cm]{images/slash_pattern.png}
+    \caption{Zoomed Encrypted pic original2.bmp}
+\end{figure}
+
+\section{Padding}
+\subsection{Padding for ECB, CBC, CFB, OFB, and CTR modes}
+ECB and CBC modes require padding, while CFB, OFB, and CTR modes do not require padding. I was inspired by one the things
+Professor mentioned in the lecture: "In CTR modes, we will generate a keystream that is the same length as the plaintext".
+I was thinking, that could be the reason why CFB, OFB, and CTR modes do not require padding. I confirmed my guess by
+the following references:\\
+\url{https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation}\\
+
 
 \end{document}
