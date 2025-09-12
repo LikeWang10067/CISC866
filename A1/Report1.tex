@@ -230,8 +230,26 @@ $ openssl enc -aes-128-cbc -d -in story_cbc_enc.txt -out story_cbc_dec.txt -K 00
 $ openssl enc -aes-128-cfb -d -in story_cfb_enc.txt -out story_cfb_dec.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
 $ openssl enc -aes-128-ofb -d -in story_ofb_enc.txt -out story_ofb_dec.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
 \end{lstlisting}
-After checking the decrypted files, the results are quite surprising.
-
-
+After checking the decrypted files, the results are quite surprising, check the following 2 pages for references:
+\begin{figure}[h]
+    \centering
+    \includegraphics[height=10cm]{images/text_comp_ecb.png}
+    \caption{Result for decrypting corrupted story\_ecb\_enc.txt}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[height=10cm]{images/text_comp_cbc.png}
+    \caption{Result for decrypting corrupted story\_cbc\_enc.txt}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[height=10cm]{images/text_comp_cfb.png}
+    \caption{Result for decrypting corrupted story\_cfb\_enc.txt}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[height=10cm]{images/text_comp_ofb.png}
+    \caption{Result for decrypting corrupted story\_ofb\_enc.txt}
+\end{figure}
 
 \end{document}

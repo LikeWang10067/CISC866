@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1757650519 "/Users/keyi/Desktop/Queen's University/2025Fall/CISC866/A1/Report1.tex" "Report1.pdf" "Report1" 1757650520
-  "/Users/keyi/Desktop/Queen's University/2025Fall/CISC866/A1/Report1.tex" 1757650518 13261 d97644e79d4dcbe154a25ccd1258de1a ""
+["pdflatex"] 1757651699 "/Users/keyi/Desktop/Queen's University/2025Fall/CISC866/A1/Report1.tex" "Report1.pdf" "Report1" 1757651701
+  "/Users/keyi/Desktop/Queen's University/2025Fall/CISC866/A1/Report1.tex" 1757651698 13991 607cbb48518df6d2dea8bdc589fe2e76 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -89,9 +89,9 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1678123283 2826428 a5b4a735cb25ccf6092db805fe842946 ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "Report1.aux" 1757650520 2627 a5867aacc0c389a1d02d55a6c7b64ad1 "pdflatex"
-  "Report1.out" 1757650520 2112 36a163f3e1fa04c5b76ada57700ad386 "pdflatex"
-  "Report1.tex" 1757650518 13261 d97644e79d4dcbe154a25ccd1258de1a ""
+  "Report1.aux" 1757651701 3335 2234dc9b0678b4c0dbc709ecc8d33f12 "pdflatex"
+  "Report1.out" 1757651701 2112 36a163f3e1fa04c5b76ada57700ad386 "pdflatex"
+  "Report1.tex" 1757651698 13991 607cbb48518df6d2dea8bdc589fe2e76 ""
   "images/cbc_dec.png" 1757647568 167330 b1a8e36d19eea9e97f8a5822f273c033 ""
   "images/cfb_dec.png" 1757647594 168031 d9521a9d3654b8a85483f394ae22bcac ""
   "images/ecb_dec.png" 1757647523 147278 9ad6620be42be5b2b0903220bdff4ecf ""
@@ -101,6 +101,10 @@
   "images/pic_2_cbc.png" 1757508761 3894444 9370b77ecdaf2b2a63035ade95ae2271 ""
   "images/pic_2_ecb.png" 1757508711 3307154 6cac5c2c49776ab9ae14859bc97171b3 ""
   "images/slash_pattern.png" 1757621548 528487 0377ecf49c7f2527587a46a41f2afa31 ""
+  "images/text_comp_cbc.png" 1757650676 982016 92946edad8b290f82d804e42dd27acc0 ""
+  "images/text_comp_cfb.png" 1757650736 987099 599a268df10625dc17f539eaaa0b66f8 ""
+  "images/text_comp_ecb.png" 1757650641 991009 d25cce5d031ca438ce735c1779443ae0 ""
+  "images/text_comp_ofb.png" 1757650550 940853 5a8ecf42676e5dcff94c9cc3ee61ac86 ""
   (generated)
   "Report1.aux"
   "Report1.log"
