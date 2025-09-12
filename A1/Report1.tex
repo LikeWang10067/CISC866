@@ -178,7 +178,7 @@ $ hexdump -C aes_256_2_dec.txt
 00000010  10 10 10 10 10 10 10 10  10 10 10 10 10 10 10 10  |................|
 00000020
 \end{lstlisting}
-The original file size is 16 bytes, the encrypted file size is 32 bytes (which is expected)\\
+The original file size is 16 bytes, the encrypted file size is 32 bytes (which is same as 128-bits AES)\\
 Now let's try a file with size of 47 bytes:
 \begin{lstlisting}[language=Python]
 $ echo -n "This is a test file for 256-bit AES encryption." > aes_256_3.txt
@@ -190,7 +190,9 @@ $ hexdump -C aes_256_3_dec.txt
 00000020  41 45 53 20 65 6e 63 72  79 70 74 69 6f 6e 2e 01  |AES encryption..|
 00000030
 \end{lstlisting}
-The original file size is 47 bytes, the encrypted file size is 48 (which is 32+16) bytes, which behaves exactly like 128-bit AES's padding mechanism. \\
+The original file size is 47 bytes, the encrypted file size is 48 (which is 32+16) bytes, which
+behaves exactly like 128-bit AES's padding mechanism. That means 256-bit AES didn't change the
+padding, the reason why is that 256-bit refers to the key size, not the block size.
 
 
 \end{document}
