@@ -249,7 +249,8 @@ After checking the decrypted files, the results are quite surprising, check the 
 \begin{figure}[h]
     \centering
     \includegraphics[height=10cm]{images/text_comp_ofb.png}
-    \caption{Result for decrypting corrupted story\_ofb\_enc.txt}
+    \caption{Result for decrypting corrupted story\_ofb\_enc.txt, only one character is corrupted!}
 \end{figure}
+From the results, we can see that: ECB and CBC and CFB modes have a lot of error propagation, while OFB mode only has one character corrupted.
 
 \end{document}
